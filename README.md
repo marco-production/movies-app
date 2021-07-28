@@ -1,7 +1,9 @@
-# peliculas
+# Peliculas App
 
 Aplicacion para visializar las ultimas peliculas en carteleras y su informacion.
-
+<br>
+<p align="center"><img src="https://usercontent.one/wp/www.raulferrergarcia.com/wp-content/uploads/2020/11/Google-flutter-logo.png" ></p>
+<br>
 ## Getting Started
 
 This project is a starting point for a Flutter application.
