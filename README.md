@@ -2,7 +2,7 @@
 
 Aplicación móvil para visualizar las ultimas películas en carteleras y su información.
 <br>
-<p align="center"><img src="https://usercontent.one/wp/www.raulferrergarcia.com/wp-content/uploads/2020/11/Google-flutter-logo.png" ></p>
+<p align="center"><img src="https://miro.medium.com/max/1400/1*68k6w8FfHgrT_H8OTVM1rw.png" ></p>
 <br>
 ## Getting Started
 
