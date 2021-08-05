@@ -1,7 +1,9 @@
-# peliculas
+# Peliculas App
 
-Aplicacion para visializar las ultimas peliculas en carteleras y su informacion.
-
+Aplicación móvil para visualizar las ultimas películas en carteleras y su información.
+<br>
+<p align="center"><img src="https://miro.medium.com/max/1400/1*68k6w8FfHgrT_H8OTVM1rw.png" ></p>
+<br>
 ## Getting Started
 
 This project is a starting point for a Flutter application.
