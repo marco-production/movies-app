@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-
+import 'package:peliculas/models/Cast.dart';
+import 'package:peliculas/models/CastResponse.dart';
+import 'package:peliculas/models/Movie.dart';
+import 'package:peliculas/models/MovieResponse.dart';
+import 'package:peliculas/models/PopularMovieResponse.dart';
 
 class MovieProvider extends ChangeNotifier {
 
@@ -10,26 +13,61 @@ class MovieProvider extends ChangeNotifier {
       _baseUrl  = 'api.themoviedb.org',
       _language = 'es-ES';
 
-  MovieProvider(){
-    print('Inicializacion del MovieProvider');
+  List<Movie>
+      moviesList = [],
+      popularMoviesList = [];
 
+  Map<int, List<Cast>> castList = {};
+
+  int _pageOfPopularMovie = 0;
+
+  MovieProvider(){
     this.getMovies();
+    this.getPopularMovies();
   }
 
-  getMovies() async {
+  Future<String> _getMovieHTTP(String path, [int page = 1]) async{
 
-    var url = Uri.https(_baseUrl, '/3/movie/now_playing', {
+    var url = Uri.https(_baseUrl, path, {
       'api_key': _apiKey,
       'language': _language,
-      'page': '1'
+      'page': page.toString()
     });
 
     var response = await http.get(url);
 
-    final Map<String, dynamic> decodeData = json.decode(response.body);
-
-    print(decodeData);
-
+    return response.body;
   }
 
+  getMovies() async {
+
+    var response = await _getMovieHTTP('/3/movie/now_playing');
+    final movies = MovieResponse.fromJson(response);
+
+    moviesList = movies.results;
+    notifyListeners();
+  }
+
+  getPopularMovies() async {
+
+    _pageOfPopularMovie++;
+
+    var response = await _getMovieHTTP('/3/movie/popular', _pageOfPopularMovie);
+    final movies = PopularMovieResponse.fromJson(response);
+
+    popularMoviesList = [...popularMoviesList, ...movies.results];
+    notifyListeners();
+  }
+
+  Future<List<Cast>> getCasts(int movieId) async {
+    
+    if(castList.containsKey(movieId)) return castList[movieId]!;
+
+    var response = await _getMovieHTTP('/3/movie/$movieId/credits');
+    final castResponse = CastResponse.fromJson(response);
+
+    castList[movieId] = castResponse.cast;
+
+    return castResponse.cast;
+  }
 }
