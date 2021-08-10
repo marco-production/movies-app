@@ -9,8 +9,6 @@ class DetailsScreen extends StatelessWidget {
 
     Movie movie = ModalRoute.of(context)?.settings.arguments as Movie;
 
-    print(movie.id);
-
     // TODO: implement build
     return Scaffold(
       body: CustomScrollView(

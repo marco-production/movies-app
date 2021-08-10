@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Peliculas',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.indigo,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class Movie {
-
   Movie({
     required this.adult,
     this.backdropPath,

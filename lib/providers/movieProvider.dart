@@ -5,6 +5,7 @@ import 'package:peliculas/models/CastResponse.dart';
 import 'package:peliculas/models/Movie.dart';
 import 'package:peliculas/models/MovieResponse.dart';
 import 'package:peliculas/models/PopularMovieResponse.dart';
+import 'package:peliculas/models/SearchMovie.dart';
 
 class MovieProvider extends ChangeNotifier {
 
@@ -15,23 +16,28 @@ class MovieProvider extends ChangeNotifier {
 
   List<Movie>
       moviesList = [],
-      popularMoviesList = [];
+      popularMoviesList = [],
+      searchMoviesList = [];
 
   Map<int, List<Cast>> castList = {};
 
-  int _pageOfPopularMovie = 0;
+  int
+  _pageOfPopularMovie = 0
+  //_pageOfSearchMovie = 0
+  ;
 
   MovieProvider(){
     this.getMovies();
     this.getPopularMovies();
   }
 
-  Future<String> _getMovieHTTP(String path, [int page = 1]) async{
+  Future<String> _getMovieHTTP(String path, [int page = 1, String query = '']) async{
 
     var url = Uri.https(_baseUrl, path, {
       'api_key': _apiKey,
       'language': _language,
-      'page': page.toString()
+      'page': page.toString(),
+      'query': query
     });
 
     var response = await http.get(url);
@@ -70,4 +76,17 @@ class MovieProvider extends ChangeNotifier {
 
     return castResponse.cast;
   }
+
+  Future<List<Movie>> searchMovie(String query) async {
+
+    //_pageOfSearchMovie++;
+
+    var response = await _getMovieHTTP('/3/search/movie', 1, query);
+    final movies = SearchMovie.fromJson(response);
+
+    searchMoviesList = movies.results;
+
+    return searchMoviesList;
+  }
+
 }
