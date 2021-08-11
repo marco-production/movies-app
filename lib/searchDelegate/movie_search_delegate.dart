@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/models/Movie.dart';
 import 'package:peliculas/providers/movieProvider.dart';
+import 'package:peliculas/screens/details_sreen.dart';
 import 'package:provider/provider.dart';
 
 class MovieSearchDelegate extends SearchDelegate {
@@ -72,20 +73,26 @@ class _MovieItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+    String heroId = 'delegate-${movie.id}';
+
     return Container(
       child: ListTile(
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(7.0),
-          child: FadeInImage(
-            placeholder: AssetImage('assets/images/placeholder.png'),
-            image: NetworkImage(movie.fullPosterPath),
-            width: 40,
+        leading: Hero(
+          tag: heroId,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(7.0),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/images/placeholder.png'),
+              image: NetworkImage(movie.fullPosterPath),
+              width: 40,
+            ),
           ),
         ),
         title: Text(movie.title),
         subtitle: Text(movie.originalTitle),
         onTap: (){
-          Navigator.of(context).pushNamed('/details', arguments: movie);
+          Navigator.of(context).pushNamed('/details', arguments: ScreenArguments(heroId: heroId, movie: movie));
         },
       ),
     );
