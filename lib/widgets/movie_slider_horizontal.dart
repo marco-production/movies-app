@@ -89,9 +89,11 @@ class _MovieContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
 
+    String heroId = 'horizontalSlider-${popularMovies.id}';
+
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('/details', arguments: popularMovies);
+        Navigator.of(context).pushNamed('/details', arguments: ScreenArguments(heroId: heroId, movie: popularMovies));
       },
       child: Container(
         width: 125,
@@ -100,7 +102,7 @@ class _MovieContainer extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Hero(
-              tag: popularMovies.id,
+              tag: heroId,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
                 child: FadeInImage(

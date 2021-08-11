@@ -7,26 +7,27 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Movie movie = ModalRoute.of(context)?.settings.arguments as Movie;
+    ScreenArguments? arg = ModalRoute.of(context)?.settings.arguments as ScreenArguments;
 
     // TODO: implement build
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           _CustomAppbar(
-            title: movie.title,
-            backdropPath: movie.fullBackdropPath
+            title: arg.movie.title,
+            backdropPath: arg.movie.fullBackdropPath
           ),
           SliverList(delegate: SliverChildListDelegate([
             _MovieContent(
-              id: movie.id,
-              title: movie.title,
-              posterPath: movie.fullPosterPath,
-              originalTitle: movie.originalTitle,
-              voteAverage: movie.voteAverage
+              id: arg.movie.id,
+              title: arg.movie.title,
+              posterPath: arg.movie.fullPosterPath,
+              originalTitle: arg.movie.originalTitle,
+              voteAverage: arg.movie.voteAverage,
+              heroId: arg.heroId,
             ),
-            _DescriptionOfMovie(overview: movie.overview),
-            ActorSlider(castId: movie.id),
+            _DescriptionOfMovie(overview: arg.movie.overview),
+            ActorSlider(castId: arg.movie.id),
           ])),
         ],
       ),
@@ -84,6 +85,7 @@ class _MovieContent extends StatelessWidget {
   final String posterPath;
   final String originalTitle;
   final double voteAverage;
+  final String heroId;
 
   const _MovieContent({
     Key? key,
@@ -91,7 +93,8 @@ class _MovieContent extends StatelessWidget {
     required this.title,
     required this.posterPath,
     required this.originalTitle,
-    required this.voteAverage
+    required this.voteAverage,
+    required this.heroId
   }) : super(key: key);
 
   @override
@@ -103,7 +106,7 @@ class _MovieContent extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Hero(
-            tag: id,
+            tag: heroId,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: FadeInImage(
@@ -125,7 +128,7 @@ class _MovieContent extends StatelessWidget {
                 SizedBox(height: 5),
                 Row(
                   children: <Widget>[
-                    Icon(Icons.star_outline, size: 15, color: Colors.grey),
+                    Icon(Icons.star, size: 15, color: Colors.amber),
                     SizedBox(width: 2),
                     Text(voteAverage.toString(), style: Theme.of(context).textTheme.caption)
                   ],
@@ -161,5 +164,16 @@ class _DescriptionOfMovie extends StatelessWidget {
       ),
     );
   }
+}
+
+class ScreenArguments {
+
+  final Movie movie;
+  final String heroId;
+
+  ScreenArguments({
+    required this.movie,
+    required this.heroId
+  });
 }
 

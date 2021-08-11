@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:peliculas/models/Movie.dart';
+import 'package:peliculas/screens/details_sreen.dart';
 
 class CardSwiper extends StatelessWidget {
+
   final List<Movie> movies;
 
   const CardSwiper({Key? key, required this.movies}) : super(key: key);
@@ -30,12 +32,15 @@ class CardSwiper extends StatelessWidget {
         itemWidth: mediaQuerySize.width * 0.57,
         itemHeight: mediaQuerySize.height * 0.48,
         itemBuilder: (_, int index) {
+
+          String heroId = 'cardSwiper-$index-${movies[index]}';
+
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed('/details', arguments: movies[index]);
+              Navigator.of(context).pushNamed('/details', arguments: ScreenArguments(heroId: heroId, movie: movies[index]));
             },
             child: Hero(
-              tag: movies[index].id,
+              tag: heroId,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: FadeInImage(

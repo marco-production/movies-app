@@ -74,10 +74,13 @@ class _MovieItem extends StatelessWidget {
     // TODO: implement build
     return Container(
       child: ListTile(
-        leading: FadeInImage(
-          placeholder: AssetImage('assets/images/placeholder.png'),
-          image: NetworkImage(movie.fullPosterPath),
-          width: 40,
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(7.0),
+          child: FadeInImage(
+            placeholder: AssetImage('assets/images/placeholder.png'),
+            image: NetworkImage(movie.fullPosterPath),
+            width: 40,
+          ),
         ),
         title: Text(movie.title),
         subtitle: Text(movie.originalTitle),
