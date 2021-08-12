@@ -1,12 +1,10 @@
 # Peliculas App
 
-Aplicación móvil para visualizar las ultimas películas en carteleras y su información.
+<p>Aplicación móvil para visualizar las últimas películas en carteleras, las más populares y su información, también se puede buscar cualquier película en el buscador de la app.</p>
 <br>
-<p align="center"><img src="https://miro.medium.com/max/1400/1*68k6w8FfHgrT_H8OTVM1rw.png" ></p>
+<img src="https://marcocv.herokuapp.com/assets/images/movie-github.png">
 <br>
-<img style="width:10px; height: 20px;" src="https://marcocv.herokuapp.com/assets/images/m1.png" >
-<img style="width:20px; height: 30px;" src="https://marcocv.herokuapp.com/assets/images/m2.png" >
-<img style="width:20px; height: 30px;" src="https://marcocv.herokuapp.com/assets/images/m3.png" >
+<p align="center"><img src="https://marcocv.herokuapp.com/assets/images/flutter-github.png" ></p>
 ## Getting Started
 
 This project is a starting point for a Flutter application.
