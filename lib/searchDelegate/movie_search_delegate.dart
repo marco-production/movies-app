@@ -27,13 +27,29 @@ class MovieSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    return Text('buildResults');
+    return _searchResult(query, context);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     // TODO: implement buildSuggestions
 
+    return _searchResult(query, context);
+  }
+
+  Widget _movieIcon() {
+    return Container(
+      child: Center(
+        child: Icon(
+          Icons.movie_creation_outlined,
+          size: 150,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  _searchResult(String query, BuildContext context) {
     if (query.isEmpty) return _movieIcon();
 
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
@@ -50,22 +66,9 @@ class MovieSearchDelegate extends SearchDelegate {
               itemBuilder: (_, int index) => _MovieItem(movie: movie[index]));
         });
   }
-
-  Widget _movieIcon() {
-    return Container(
-      child: Center(
-        child: Icon(
-          Icons.movie_creation_outlined,
-          size: 150,
-          color: Colors.grey,
-        ),
-      ),
-    );
-  }
 }
 
 class _MovieItem extends StatelessWidget {
-
   final Movie movie;
 
   const _MovieItem({Key? key, required this.movie}) : super(key: key);
@@ -91,8 +94,9 @@ class _MovieItem extends StatelessWidget {
         ),
         title: Text(movie.title),
         subtitle: Text(movie.originalTitle),
-        onTap: (){
-          Navigator.of(context).pushNamed('/details', arguments: ScreenArguments(heroId: heroId, movie: movie));
+        onTap: () {
+          Navigator.of(context).pushNamed('/details',
+              arguments: ScreenArguments(heroId: heroId, movie: movie));
         },
       ),
     );

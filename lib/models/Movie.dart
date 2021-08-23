@@ -38,7 +38,7 @@ class Movie {
   }
 
   get fullBackdropPath {
-    return posterPath != null ? 'https://image.tmdb.org/t/p/w500$backdropPath' : 'https://www.plataforma.sanjuan.tur.ar/assets/img/camera.jpg';
+    return backdropPath != null ? 'https://image.tmdb.org/t/p/w500$backdropPath' : 'https://www.plataforma.sanjuan.tur.ar/assets/img/camera.jpg';
   }
 
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
