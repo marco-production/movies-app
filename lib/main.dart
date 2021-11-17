@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Peliculas',
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
       theme: ThemeData.light().copyWith(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.indigo,
