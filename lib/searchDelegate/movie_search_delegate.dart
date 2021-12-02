@@ -53,9 +53,10 @@ class MovieSearchDelegate extends SearchDelegate {
     if (query.isEmpty) return _movieIcon();
 
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
+    movieProvider.getSuggestionsByQuery(query);
 
-    return FutureBuilder(
-        future: movieProvider.searchMovie(query),
+    return StreamBuilder(
+        stream: movieProvider.suggestionStream,
         builder: (_, AsyncSnapshot<List<Movie>> snapshot) {
           if (!snapshot.hasData) return _movieIcon();
 
@@ -65,6 +66,18 @@ class MovieSearchDelegate extends SearchDelegate {
               itemCount: movie.length,
               itemBuilder: (_, int index) => _MovieItem(movie: movie[index]));
         });
+
+    /*return FutureBuilder(
+        future: movieProvider.searchMovie(query),
+        builder: (_, AsyncSnapshot<List<Movie>> snapshot) {
+          if (!snapshot.hasData) return _movieIcon();
+
+          final movie = snapshot.data!;
+
+          return ListView.builder(
+              itemCount: movie.length,
+              itemBuilder: (_, int index) => _MovieItem(movie: movie[index]));
+        });*/
   }
 }
 
